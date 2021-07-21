@@ -1,0 +1,11 @@
+{
+    "databse": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "",
+        "database": "micro-aa-db"
+    },
+    "secret": "a2c6f038f15a06eb5b1acca08bed6f2038ba19578eb7aabdfabb5f31c054bf5c5e1e3aaf8dcdd2d16d2369ce0e24e2ace2753f96e2388f5c34541ea668751943",
+    "roles": ["employee", "administrator"]
+}
