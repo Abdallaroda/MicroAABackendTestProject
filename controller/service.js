@@ -82,6 +82,7 @@ async function update(emailParams, userParams, tokenParams) {
             throw `Email: "${newEmail}" is already registered by another user!`;
         }
     }
+
     //check if url param is present and user is authorized
     if(emailParams && user.role == 'administrator') {
         //get target user
