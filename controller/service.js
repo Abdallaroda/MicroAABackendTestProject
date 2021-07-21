@@ -70,7 +70,7 @@ async function update(emailParams, userParams, tokenParams) {
         userParams.hash = await bcrypt.hash(userParams.password, 10);
     }
     
-    //check if: user wants to change email
+    //check if user wants to change email
     if(userParams.email){
         //search for inputed email in database
         const otherEmail = db.User.findOne({ where: { email: userParams.email } });
@@ -82,7 +82,7 @@ async function update(emailParams, userParams, tokenParams) {
             throw `Email: "${newEmail}" is already registered by another user!`;
         }
     }
-
+    //check if url param is present and user is authorized
     if(emailParams && user.role == 'administrator') {
         //get target user
         const tgtUser = await helpers.searchUser(emailParams);
@@ -93,6 +93,7 @@ async function update(emailParams, userParams, tokenParams) {
 
         return helpers.ignoreHash(tgtUser.get());
     }
+    //else if no url param is present
     else {
         //assign old user new crendentials
         Object.assign(user, userParams)
