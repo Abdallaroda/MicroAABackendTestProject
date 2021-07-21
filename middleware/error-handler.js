@@ -2,7 +2,7 @@ module.exports = errorHandler;
 
 function errorHandler(err, req, res, next) {
     switch(true) {
-        //404(not found) else: throw 400(bas request)
+        //404(not found) else: throw 400(bad request)
         case typeof err === 'string':
             const err404 = err.toLowerCase().endsWith('not found');
             const errCode = err404 ? 404 : 400;
