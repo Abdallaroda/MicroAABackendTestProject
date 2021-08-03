@@ -49,8 +49,8 @@ async function _delete(emailParams, tokenParams) {
     const user = await helpers.searchUser(emailParams);
 
     //check if user have admin privileges
-    if(tokenParams.role !== 'administrator') {
-        throw 'You do not have the user rights to performe this action!'
+    if(!config.roles[tokenParams.role]) {
+        throw 'You do not have the user rights to performe this action!';
     }
 
     await user.destroy();
@@ -61,8 +61,8 @@ async function update(emailParams, userParams, tokenParams) {
     const user = await db.User.findOne({ where: { email: tokenParams.email } });
 
     //check if url param is present while user is unauthorized
-    if(emailParams && user.role !== 'administrator') {
-        throw 'Unauthorized'
+    if(emailParams && !config.roles[user.role]) {
+        throw 'You do not have the user rights to performe this action!';
     }
     
     //hash password if inputed
@@ -84,7 +84,7 @@ async function update(emailParams, userParams, tokenParams) {
     }
 
     //check if url param is present and user is authorized
-    if(emailParams && user.role == 'administrator') {
+    if(emailParams && config.roles[user.role]) {
         //get target user
         const tgtUser = await helpers.searchUser(emailParams);
 
