@@ -23,7 +23,7 @@ function registerValidation(req, res, next) {
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().email().required(),
-        role: Joi.string().valid(...config.roles).required(),
+        role: Joi.string().valid(...Object.keys(config.roles)).required(),
         password: Joi.string().min(6).required()
     });
     validateReq(req, next, schema);
@@ -42,7 +42,7 @@ function updateValidation(req, res, next) {
         firstName: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
         email: Joi.string().email().empty(''),
-        role: Joi.string().valid(...config.roles).empty(''),
+        role: Joi.string().valid(...Object.keys(config.roles)).empty(''),
         password: Joi.string().min(6).empty('')
     });
     validateReq(req, next, schema);
